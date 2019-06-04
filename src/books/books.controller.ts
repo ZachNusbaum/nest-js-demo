@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDTO } from './dto/create-book.dto';
 
@@ -15,5 +15,11 @@ export class BooksController {
   async getBook(@Param('bookID') bookID) {
     const book = await this.booksService.getBook(bookID);
     return book;
+  }
+
+  @Post()
+  async addBook(@Body() createBookDTO: CreateBookDTO) {
+    const books = await this.booksService.addBook(createBookDTO);
+    return books;
   }
 }
